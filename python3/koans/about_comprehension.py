@@ -3,6 +3,35 @@
 
 from runner.koan import *
 
+"""
+List comprehensions provide a concise way to create lists. Comprehension syntax consists of
+brackets containing an expression folowed by a for clause, then zero or more for or if clauses.
+
+Example 1:
+
+for item in list:
+    if conditional:
+        doSomething()
+
+The above expression is equivalent to
+
+[expression for item in list if conditional]
+
+Example 2: 
+
+Find all of the even numbers in the list [1,2,3,4,5]
+
+res = []
+for num in nums:
+    if num % 2 == 0
+        res.append(num)
+
+    return sum(res)
+
+OR
+
+sum(0 + num for num in nums if num % 2 == 0)
+"""
 
 class AboutComprehension(Koan):
 
