@@ -17,9 +17,21 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    # Equilateral = all are the same
 
+    # Case 1: all params are 0 - done
+    # Case 2: negative number in one of the params - done
+    # Case 3: Sum of two sides should be greater than the third one
+    sides = sorted([a,b,c])
+    unique_sides = sorted(set(sides))
+
+    if sides[2] >= sides[0] + sides[1]: 
+        raise TriangleError('Sum of two sides cannot exceed remaining side')
+    if unique_sides[0] <= 0: raise TriangleError('Sides cannot be 0 or less')
+
+    triangle = set([a,b,c])
+    return 'scalene' if len(triangle) == 3 else ('isosceles' if len(triangle) == 2 else 'equilateral')
+    
 # Error class used in part 2.  No need to change this code.
 class TriangleError(Exception):
     pass
