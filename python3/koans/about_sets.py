@@ -9,47 +9,51 @@ class AboutSets(Koan):
 
         there_can_only_be_only_one = set(highlanders)
 
-        self.assertEqual(__, there_can_only_be_only_one)
+        self.assertEqual({"MacLeod", "Ramirez", "Matunas", "Malcolm"}, there_can_only_be_only_one)
 
     def test_empty_sets_have_different_syntax_to_populated_sets(self):
-        self.assertEqual(__, {1, 2, 3})
-        self.assertEqual(__, set())
+        self.assertEqual({1, 2, 3}, {1, 2, 3})
+        self.assertEqual(set(), set())
 
     def test_dictionaries_and_sets_use_same_curly_braces(self):
         # Note: Literal sets using braces were introduced in python 3.
         #       They were also backported to python 2.7.
 
-        self.assertEqual(__, {1, 2, 3}.__class__)
-        self.assertEqual(__, {'one': 1, 'two': 2}.__class__)
+        self.assertEqual(set().__class__, {1, 2, 3}.__class__)
+        self.assertEqual({'one': 1}.__class__, {'one': 1, 'two': 2}.__class__)
 
-        self.assertEqual(__, {}.__class__)
+        self.assertEqual({}.__class__, {}.__class__)
 
     def test_creating_sets_using_strings(self):
-        self.assertEqual(__, {'12345'})
-        self.assertEqual(__, set('12345'))
+        self.assertEqual({'12345'}, {'12345'})
+        self.assertEqual({'1', '2', '3', '4', '5'}, set('12345'))
 
     def test_convert_the_set_into_a_list_to_sort_it(self):
-        self.assertEqual(__, sorted(set('12345')))
+        self.assertEqual(['1','2','3','4','5'], sorted(set('12345')))
 
     # ------------------------------------------------------------------
 
     def test_set_have_arithmetic_operators(self):
         scotsmen = {'MacLeod', 'Wallace', 'Willie'}
         warriors = {'MacLeod', 'Wallace', 'Leonidas'}
-
-        self.assertEqual(__, scotsmen - warriors)
-        self.assertEqual(__, scotsmen | warriors)
-        self.assertEqual(__, scotsmen & warriors)
-        self.assertEqual(__, scotsmen ^ warriors)
+        # Subtraction removes the difference?
+        self.assertEqual({"Willie"}, scotsmen - warriors)
+        # Pipe combines the sets
+        self.assertEqual({'Willie', 'Wallace', 'Leonidas', 'MacLeod'}, scotsmen | warriors)
+        # & joins common values within a set together
+        self.assertEqual({'Wallace', 'MacLeod'}, scotsmen & warriors)
+        # ^ gathers unique values in each set and combines
+        self.assertEqual({'Leonidas', 'Willie'}, scotsmen ^ warriors)
 
     # ------------------------------------------------------------------
 
     def test_we_can_query_set_membership(self):
-        self.assertEqual(__, 127 in {127, 0, 0, 1} )
-        self.assertEqual(__, 'cow' not in set('apocalypse now') )
+        self.assertEqual(True, 127 in {127, 0, 0, 1} )
+        self.assertEqual(True, 'cow' not in set('apocalypse now') )
 
+    # Sets can be compared by their unicode values
     def test_we_can_compare_subsets(self):
-        self.assertEqual(__, set('cake') <= set('cherry cake'))
-        self.assertEqual(__, set('cake').issubset(set('cherry cake')) )
+        self.assertEqual(True, set('cake') <= set('cherry cake'))
+        self.assertEqual(True, set('cake').issubset(set('cherry cake')) )
 
-        self.assertEqual(__, set('cake') > set('pie'))
+        self.assertEqual(False, set('cake') > set('pie'))
