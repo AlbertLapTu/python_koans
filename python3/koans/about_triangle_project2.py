@@ -15,7 +15,6 @@ class AboutTriangleProject2(Koan):
             triangle(0, 0, 0)
         with self.assertRaises(TriangleError):
             triangle(3, 4, -5)
-
         # The sum of any two sides should be greater than the third one
         with self.assertRaises(TriangleError):
             triangle(1, 1, 3)
